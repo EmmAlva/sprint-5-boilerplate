@@ -67,10 +67,7 @@ const Header = (data) =>{
         div.show();
 //        
     });
-    
-    
-    
-    
+        
     form.on('keypress', function (e){
         if((e.which == '13')&&($('input').val() !== "")){
             var confi = confirm("¿Confirma crear nuevo tema?");
@@ -80,19 +77,18 @@ const Header = (data) =>{
                     var body = {
                                 'author_name': 'Nocturno',
                                 'content': "",
+                                'responses_count':"" 
                             };
 //                    location.href ="index.html";
                  
                     body.content = $('input').val();
                     
                     xhr.send(JSON.stringify(body));
+
                     console.log(body);
                 }
         }
-    });
-    
-    
-    
+    });    
     
     span.on('click', function(){
        div.hide();       
@@ -166,25 +162,27 @@ $( _ =>{
             
     });
     
-    
+    const PostJ = () => {
+
+    };
         xhr.open('POST', 'http://examen-laboratoria-sprint-5.herokuapp.com/topics');
         xhr.setRequestHeader('Content-Type', 'application/json');
 
         xhr.onreadystatechange = function () {
           if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
+         //   console.log('Status:', this.status);
+           // console.log('Headers:', this.getAllResponseHeaders());
             console.log('Body:', this.responseText);
           }
-        };
-            
 
-  
+          $.getJSON("https://examen-laboratoria-sprint-5.herokuapp.com/topics", function(info){
+                       
+                        reRender();
 
-    
-//       
+                    });
+        };          
 
-    
+//         
         const root = $('#root');
         render(root);
     
